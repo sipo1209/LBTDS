@@ -1,14 +1,9 @@
 body{
 	  padding-top: 100px;
 	  padding-bottom: 40px;
-	  background-color: #eee;
-  	  background-image: url(T1.jpg) ;
+  	  background-image: url(../img/Background.jpg);
   	  }
 
-h2{
-  	color: red;
-  	text-align:center;
-}
 
 .form-signin {
     max-width: 330px;
