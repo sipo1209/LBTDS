@@ -1,13 +1,13 @@
-body{
-	  padding-top: 100px;
+body {
+	  padding-top: 180px;
   	  background-image: url(../img/Background.jpg);
-  	  }
+}
 
 .form-signin {
     max-width: 330px;
     padding: 30px;
     margin: 0 auto;
-    height:330px;
+    height:300px;
     filter:alpha(Opacity=90);
     -moz-opacity:0.9;
     opacity: 0.9;
