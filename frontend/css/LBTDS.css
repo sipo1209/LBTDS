@@ -1,0 +1,338 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, input, select, font {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 12px;
+	font: inherit;
+	font-family: Tohoma,"宋体";
+	vertical-align: baseline;
+}
+
+#doc {
+	min-width: 960px;
+	position: relative;
+}
+ol, ul {
+	list-style: none;
+}
+a {
+	color: #2472df;
+	text-decoration: none;
+}
+
+li {
+	display: list-item;
+	text-align: -webkit-match-parent;
+}
+
+
+
+#logoutHead, #loginHead {
+	display: none;
+}
+.floatr {
+	float: right;
+}
+.floatl {
+	float: left;
+}
+
+.mr5 {
+	margin-right: 5px;
+}
+#logoutHead .floatl {
+	margin-right: 2px;
+}
+#logoutHead img {
+	height: 16px;
+	width: 16px;
+	margin-top: 7px;
+	visibility: hidden;
+}
+img {
+	border: 0;
+	vertical-align: middle;
+}
+#user_operating div {
+	text-align: center;
+	color: #666;
+	cursor: pointer;
+}
+#user_operating {
+	width: 95px;
+	background: #FFF;
+	border: 1px solid #9db3cb;
+	top: 30px;
+	right: 10px;
+	position: absolute;
+	line-height: 29px;
+	padding-top: 1px;
+	display: none;
+	z-index: 300;
+}
+#user_operating a {
+	color: #666;
+}
+#top_navigation a {
+	color: #CCC;
+	padding: 0 7px;
+}
+
+.clear {
+	clear: both;
+}
+
+#top_logo {
+	position: relative;
+	background: #C1C6D8;
+	z-index: 202;
+	border-bottom: 1px solid #e4e4e4;
+}
+
+.logo_left_div {
+	position: relative;
+}
+.logo_left_div_item {
+	margin-left: 10px;
+	display: inline;
+	float: left;
+}
+.logo_left_div_item .border_right {
+border-right: 1px solid #ececec;
+}
+.
+.logo_left_div_item.area :hover {
+	background: #FF0000;
+
+}
+.logo_img {
+	background: url(car.jpg) no-repeat -7px;
+	height: 46px;
+	width: 159px;
+	margin-top: 15px;
+	cursor: pointer;
+}
+form {
+	margin: 0;
+	display: inline;
+}
+.logo_left_div_item input {
+	margin-top: 20px;
+}
+.txt300 {
+	border: 2px solid #2ba1e7;
+	width: 242px;
+	font: 16px arial;
+	height: 25px;
+	line-height: 25px;
+	padding: 2px 5px;
+	border-right: 0;
+}
+.magnifier_button {
+	width: 66px;
+	height: 36px;
+	margin-top: 6px;
+	background: url(http://www.amap.com/images/blue_btn.png) no-repeat -138px -73px;
+	cursor: pointer;
+}
+input {
+	outline: 0;
+}
+
+#logoCapability {
+	float: left;
+	margin-left: 15px;
+}
+#logoCapability .area {
+	font-size: 16px;
+	float: left;
+	color: #0c8fd7;
+	font-weight: bold;
+	cursor: pointer;
+	text-align: center;
+	padding: 28px 20px 25px;
+	border-left: 1px solid #ececec;
+}
+#logoCapability .area:hover{
+	background:#d7f2fd;
+}
+#main {
+	min-width: 960px;
+	position: relative;
+}
+#map_container_tools {
+	height: 36px;
+	border-bottom: 1px solid #cad2dd;
+	box-shadow: 1px 2px 3px 0 #828e9a;
+	background: #D0E7DC;
+	position: relative;
+	z-index: 302;
+}
+.tools_container {
+	background: #FFF;
+	border: 1px solid #abceec;
+	box-shadow: 2px 2px 2px -1px #bbb;
+	position: absolute;
+	z-index: 302;
+	top: 29px;
+	right: 21px;
+	width: 100px;
+	display: none;
+}
+.tools_container_item_search {
+	background-position: 8px -47px;
+}
+.tools_container_item_ranging {
+	background-position: 8px 9px;
+}
+.tools_container_item_marker {
+	
+	background-position: 8px -19px;
+}
+.tools_container_item {
+	height: 28px;
+	line-height: 28px;
+	width: 75px;
+	padding-left: 25px;
+	cursor: pointer;
+	background: #FFF url(http://www.amap.com/images/map_tools/map_tab_11.png) no-repeat 0 0;
+}
+#map_left_ul li {
+	margin-left: 8px;
+	margin-right: 0;
+}
+#map_container_tools li {
+	float: left;
+	cursor: pointer;
+	display: inline;
+	padding: 2px;
+	margin-right: 10px;
+	margin-left: 0;
+}
+
+
+
+#map_tool_right .selected {
+	color: #343434;
+}
+
+
+#map_tool {
+	border: 1px solid #abceec;
+	border-radius: 2px;
+	height: 22px;
+	line-height: 22px;
+	margin: 6px 4px;
+	float: left;
+}
+#map_tool div {
+	display: block;
+	float: left;
+	padding: 0 12px;
+	color: #666;
+	cursor: pointer;
+	background: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f3f7));
+	background: -moz-linear-gradient(top,#fff,#f2f3f7);
+	background: linear-gradient(to bottom,#fff,#f2f3f7);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFFFFF,endColorstr=#F2F3F7,grandientType=1);
+}
+.not_display {
+	display: none;
+}
+#map_tools .text {
+	height: 22px;
+	line-height: 22px;
+	display: inline-block;
+	vertical-align: top;
+}
+#map_tools .tools {
+	background-image: url(http://www.amap.com/images/map_tools/tab_03.png);
+	background-repeat: no-repeat;
+	background-position: 6px 9px;
+	display: inline-block;
+	height: 22px;
+	width: 16px;
+}
+}
+
+#map_left_ul div {
+	margin-top: 5px;
+	padding: 4px 6px;
+	border-radius: 2px;
+	float: left;
+}
+
+.icon_expand {
+	width: 14px;
+	height: 11px;
+	float: left;
+	background: url(http://www.amap.com/images/tool_btn.png) no-repeat -81px -1px;
+}
+#panelarrow2 {
+	position: absolute;
+	left: 930px;
+	text-align: center;
+	width: 24px;
+	height: 78px;
+	border-radius: 3px 0 0 3px;
+	border: 1px solid #BBBBBB;
+	border-right: 0;
+	background: #FFFFFF;
+	box-shadow: 1px 1px 1px #999;
+	top: 40%;
+	z-index: 3;
+}
+#panelarrow2:hover{
+	background:#d7f2fd;
+}
+#panelimg2 {
+	margin-top: 32px;
+	margin-left: 8px;
+	height: 12px;
+	width: 6px;
+	background: no-repeat url(http://www.lewoer.com/img/panelarrow.png?1.00) 0px 0px;
+	}
+#main_right {
+	width: 30%;
+	min-width: 300px;
+	_width: 300px;
+	height: 1000px;
+	border-right: 1px solid #cad2dd;
+	box-shadow: 1px 3px 4px 0 #828e9a;
+	z-index: 1;
+	overflow-y:auto;
+	overflow-x:hidden; 
+	position: absolute;
+	
+	top: 0;
+	float: left;
+
+}
+#main_right_container {
+	width: 30%;
+	margin-right: 5px;
+	float: left;
+	position: relative;
+	min-height: 99%;
+}
+#listings {
+	background-color: #F6F6F6;
+}
+.listings{
+	width: 100%;
+}
+.public-listings .listings {
+	font-size: 14px;
+	line-height: 24px;
+	height: 100%;
+	margin: 0;
+	overflow: auto;
+	padding: 0;
+	-ms-overflow-x: hidden;
+	overflow-x: hidden;
+}
+#listings .biaoge1{
+	height:100px;
+	border: solid;
+	border-width: 1px;
+}
