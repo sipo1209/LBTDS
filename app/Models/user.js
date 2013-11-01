@@ -1,9 +1,8 @@
 var mongodb = require('./db');
 
 function User(user) {
-    this.name = user.name;
+    this.username = user.username;
     this.password = user.password;
-    this.email = user.email;
 };
 
 module.exports = User;
@@ -12,9 +11,8 @@ module.exports = User;
 User.prototype.save = function(callback) {
     //要存入数据库的用户文档
     var user = {
-        name: this.name,
-        password: this.password,
-        email: this.email
+        username: this.username,
+        password: this.password
     };
     //打开数据库
     mongodb.open(function (err, db) {
@@ -37,7 +35,7 @@ User.prototype.save = function(callback) {
 };
 
 //读取用户信息
-User.get = function(name, callback) {
+User.get = function(username, callback) {
     //打开数据库
     mongodb.open(function (err, db) {
         if (err) {
@@ -49,9 +47,9 @@ User.get = function(name, callback) {
                 mongodb.close();//关闭数据库
                 return callback(err);//错误，返回 err 信息
             }
-            //查找用户名（name键）值为 name 一个文档
+            //查找用户名（username键）值为 username 一个文档
             collection.findOne({
-                name: name
+                username: username
             }, function(err, user){
                 mongodb.close();//关闭数据库
                 if (user) {

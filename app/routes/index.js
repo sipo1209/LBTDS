@@ -7,18 +7,23 @@ var crypto = require('crypto'),
 module.exports = function(app){
 
     app.get('/', function(req, res){
-        Post.get(null, function (err, posts) {
-            if (err) {
-                posts = [];
-            }
-            res.render('index', {
-                title: '主页',
-                user: req.session.user,
-                posts: posts,
-                success: req.flash('success').toString(),
-                error: req.flash('error').toString()
-            });
-        });
+        if (req.session.user) {
+            res.redirect('/livemap');
+        }
+        else {
+            res.redirect('/login');
+        }
+    });
+
+    app.get('/livemap', checkLogin);
+    app.get('/livemap', function(req, res){
+        res.render('livemap', {
+            title: '实况地图',
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString(),
+            currenturl: req.url
+        })
     });
 
     app.get('/reg', checkNotLogin);
@@ -27,12 +32,13 @@ module.exports = function(app){
             title: '注册',
             user: req.session.user,
             success: req.flash('success').toString(),
-            error: req.flash('error').toString()
+            error: req.flash('error').toString(),
+            currenturl: req.url
         })
     });
     app.post('/reg', checkNotLogin);
     app.post('/reg', function(req, res){
-        var name = req.body.name,
+        var username = req.body.username,
             password = req.body.password,
             password_re = req.body['password-repeat'];
         //检验用户两次输入的密码是否一致
@@ -44,12 +50,11 @@ module.exports = function(app){
         var md5 = crypto.createHash('md5'),
             password = md5.update(req.body.password).digest('hex');
         var newUser = new User({
-                name: req.body.name,
-                password: password,
-                email: req.body.email
+            username: req.body.username,
+            password: password
         });
         //检查用户名是否已经存在
-        User.get(newUser.name, function (err, user) {
+        User.get(newUser.username, function (err, user) {
             if (user) {
                 req.flash('error', '用户已存在!');
                 return res.redirect('/reg');//用户名存在则返回注册页
@@ -74,7 +79,8 @@ module.exports = function(app){
             title: '登陆',
             user: req.session.user,
             success: req.flash('success').toString(),
-            error: req.flash('error').toString()
+            error: req.flash('error').toString(),
+            currenturl: req.url
         })
     });
     app.post('/login', checkNotLogin);
@@ -83,7 +89,7 @@ module.exports = function(app){
         var md5 = crypto.createHash('md5'),
             password = md5.update(req.body.password).digest('hex');
         //检查用户是否存在
-        User.get(req.body.name, function (err, user) {
+        User.get(req.body.username, function (err, user) {
             if (!user) {
                 req.flash('error', '用户不存在!');
                 return res.redirect('/login');//用户不存在则跳转到登录页
@@ -107,33 +113,17 @@ module.exports = function(app){
         return res.redirect('/');
     });
 
-    app.get('/post', checkLogin);
-    app.get('/post', function(req, res){
-        res.render('post', {
-            title: '发表',
+    app.use(function (req, res) {
+        res.render("404", {
+            title: '没有找到该页面',
             user: req.session.user,
             success: req.flash('success').toString(),
-            error: req.flash('error').toString()
-        })
-    });
-    app.post('/post', checkLogin);
-    app.post('/post', function (req, res) {
-        var currentUser = req.session.user,
-            post = new Post(currentUser.name, req.body.title, req.body.post);
-        post.save(function (err) {
-            if (err) {
-                req.flash('error', err);
-                return res.redirect('/');
-            }
-            req.flash('success', '发布成功!');
-            res.redirect('/');
+            error: req.flash('error').toString(),
+            currenturl: req.url
         });
     });
 
-    app.use(function (req, res) {
-        res.render("404");
-    });
-
+    //两个辅助函数
     function checkLogin(req, res, next) {
         if (!req.session.user) {
             req.flash('error', '未登录!');

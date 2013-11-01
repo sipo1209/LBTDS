@@ -1,5 +1,5 @@
 module.exports = {
     cookieSecret: 'carxus',
-    db: 'blog',
+    db: 'livemap',
     host: 'localhost'
 }
