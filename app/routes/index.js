@@ -113,6 +113,17 @@ module.exports = function(app){
         return res.redirect('/');
     });
 
+    app.get('/account', checkLogin);
+    app.get('/account', function(req, res){
+        res.render('account', {
+            title: '账号管理',
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString(),
+            currenturl: req.url
+        })
+    });
+
     app.use(function (req, res) {
         res.render("404", {
             title: '没有找到该页面',
