@@ -1,5 +1,5 @@
 module.exports = {
     cookieSecret: 'carxus',
-    db: 'livemap',
+    dbname: 'vehicle_monitor',
     host: 'localhost'
 }

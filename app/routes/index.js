@@ -8,17 +8,17 @@ module.exports = function(app){
 
     app.get('/', function(req, res){
         if (req.session.user) {
-            res.redirect('/livemap');
+            res.redirect('/monitoring');
         }
         else {
             res.redirect('/login');
         }
     });
 
-    app.get('/livemap', checkLogin);
-    app.get('/livemap', function(req, res){
-        res.render('livemap', {
-            title: '实况地图',
+    app.get('/monitoring', checkLogin);
+    app.get('/monitoring', function(req, res){
+        res.render('monitoring', {
+            title: '车辆监控',
             user: req.session.user,
             success: req.flash('success').toString(),
             error: req.flash('error').toString(),
