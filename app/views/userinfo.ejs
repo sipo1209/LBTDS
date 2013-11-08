@@ -1,17 +1,19 @@
 <%- include header %>
 
-<p>用户名: <%= presentuser.username %></p>
-<p>用户类型: <%= presentuser.usertype %></p>
-
-<% if(presentuser.usertype !== 'admin') { %>
-<p>车辆名: <%= presentuser.vehiclename %></p>
-<p>员工名: <%= presentuser.staffname %></p>
-<p>电话号: <%= presentuser.phonenumber %></p>
+<legend>操作面板</legend>
+<% if(viewingUser.username == locals.user.username | locals.user.userType == 'admin' ) { %>
+    <a class="btn" href="<%= locals.user.username %>/editpw">修改密码</a>
+    <a class="btn" href="<%= locals.user.username %>/editinfo">编辑信息</a>
 <% } %>
 
-<% if(presentuser.username == locals.user.username | locals.user.usertype == 'admin' ) { %>
-    <a href="<%= locals.user.username %>/editpw">修改密码</a>
-    <a href="<%= locals.user.username %>/editinfo">编辑信息</a>
+<hr />
+<legend>个人信息</legend>
+<p>用户名: <%= viewingUser.username %></p>
+<p>用户类型: <%= viewingUser.userType %></p>
+<% if(viewingUser.userType !== 'admin') { %>
+<p>车辆名: <%= viewingUser.vehicleName %></p>
+<p>员工名: <%= viewingUser.staffName %></p>
+<p>电话号: <%= viewingUser.phoneNumber %></p>
 <% } %>
 
 <%- include footer %>

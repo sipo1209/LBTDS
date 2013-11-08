@@ -3,10 +3,10 @@ var mongodb = require('./db');
 function User(user) {
     this.username = user.username;
     this.password = user.password;
-    this.usertype = user.usertype;
-    this.vehiclename = user.vehiclename,
-    this.staffname = user.staffname,
-    this.phonenumber = user.phonenumber
+    this.userType = user.userType;
+    this.vehicleName = user.vehicleName,
+    this.staffName = user.staffName,
+    this.phoneNumber = user.phoneNumber
 };
 
 module.exports = User;
@@ -14,21 +14,21 @@ module.exports = User;
 //存储用户信息
 User.prototype.save = function(callback) {
     //要存入数据库的用户文档
-    if(this.usertype == 'admin') {
+    if(this.userType == 'admin') {
         var user = {
             username: this.username,
             password: this.password,
-            usertype: this.usertype
+            userType: this.userType
         };
     }
     else {
         var user = {
             username: this.username,
             password: this.password,
-            usertype: this.usertype,
-            vehiclename: this.vehiclename,
-            staffname: this.staffname,
-            phonenumber: this.phonenumber
+            userType: this.userType,
+            vehicleName: this.vehicleName,
+            staffName: this.staffName,
+            phoneNumber: this.phoneNumber
         };
     }
 
@@ -79,7 +79,7 @@ User.get = function(username, callback) {
     });
 };
 
-User.getList = function(usertype, callback) {
+User.getList = function(userType, callback) {
     //打开数据库
     mongodb.open(function (err, db) {
         if (err) {
@@ -92,8 +92,8 @@ User.getList = function(usertype, callback) {
                 return callback(err);//错误，返回 err 信息
             }
             var query = {};
-            if (usertype) {
-                query.usertype = usertype;
+            if (userType) {
+                query.userType = userType;
             }
             //查找用户名（username键）值为 username 一个文档
             collection.find(query).toArray(function(err, users){

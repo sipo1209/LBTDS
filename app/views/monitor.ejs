@@ -1,6 +1,5 @@
 <%- include header %>
-    <link rel="stylesheet" href="stylesheets<%- currenturl + '.css'%>">
-
+    <link rel="stylesheet" href="stylesheets<%= locals.url + '.css'%>">
     <div class="row-fluid">
         <div class="span9">
             <div id="map_canvas">
@@ -30,24 +29,16 @@
 
 
                     <ul class="sidebox-list">
-                        <li class="item">
-                            <a href="">
-                                <span class="vehiclename">鄂A0001</span>/
-                                <span class="staffname">张三</span>
-                            </a>
-                            <span class="vehiclestatus">驶向任务...</span>
-                            <span class="vehicledescription">一些车辆的详细信息<br />车坏了</span>
-                        </li>
-
-                        <li class="item">
-                            <a href="">
-                                <span class="vehiclename">鄂A0001</span>/
-                                <span class="staffname">张三</span>
-                            </a>
-                            <span class="vehiclestatus">停止...</span>
-                            <span class="vehicledescription">一些车辆的详细信息<br />车没油了</span>
-                        </li>
-
+                        <% staffs.forEach(function (staff, index) { %>
+                            <li class="item">
+                                <a href="">
+                                    <span class="vehiclename"><%= staff.vehicleName %></span> /
+                                    <span class="staffname"><%= staff.staffName %></span>
+                                </a>
+                                <span class="vehiclestatus">下线...</span>
+                                <span class="vehicledescription">电话号：<%= staff.phoneNumber %><br />其他信息</span>
+                            </li>
+                        <% }) %>
                     </ul>
                 </div>
             </div>

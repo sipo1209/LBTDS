@@ -2,25 +2,31 @@
 
 <legend>操作面板</legend>
 <a class="btn" href="">修改密码</a>
-<a class="btn" href="/register?registertype=staff">员工注册</a>
-<a class="btn" href="/register?registertype=admin">管理员注册</a>
+<a class="btn" href="/register?registerType=staff">员工注册</a>
+<a class="btn" href="/register?registerType=admin">管理员注册</a>
 <hr />
 
 <div class="row-fluid">
     <div class="span6">
         <legend>员工</legend>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
+        <% staffs.forEach(function (staff, index) { %>
+            <p>
+                用户名：<a href="/users/<%= staff.username %>"><%= staff.username %></a><br />
+                车辆名：<%= staff.vehicleName %><br />
+                员工名：<%= staff.staffName %><br />
+                手机号：<%= staff.phoneNumber %><br />
+            </p>
+            <hr />
+        <% }) %>
     </div>
     <div class="span6">
         <legend>管理员</legend>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
+        <% admins.forEach(function (admin, index) { %>
+        <p>
+            账号：<a href="/users/<%= admin.username %>"><%= admin.username %></a><br />
+        </p>
+        <hr />
+        <% }) %>
     </div>
 </div>
 

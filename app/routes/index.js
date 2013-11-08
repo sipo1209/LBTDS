@@ -16,28 +16,28 @@ module.exports = function(app){
 
     app.get('/monitor', checkLogin);
     app.get('/monitor', function(req, res){
-        res.render('monitor', {
-            title: '车辆监控',
-            user: req.session.user,
-            success: req.flash('success').toString(),
-            error: req.flash('error').toString(),
-            currenturl: req.url
-        })
+        User.getList('staff', function (err, staffs) {
+            if (!staffs) {
+                req.flash('error', '查询不到!');
+                return res.redirect('/');//用户不存在则跳转到账号管理页
+            }
+            res.render('monitor', {
+                title: '车辆监控',
+                user: req.session.user,
+                staffs: staffs
+            })
+        });
     });
 
     app.get('/register', function(req, res){
-        if(!req.session.user || (req.session.user && req.session.user.usertype == 'admin')) {//未登录者or管理员
-            //决定registertype的值（registertype的值用来决定ejs显示哪些控件）
-            if(!req.session.user || (req.session.user && req.query.registertype != 'admin')) {//未登录者只能注册staff，管理员若没有请求注册admin类型则也为staff
-                var registertype = 'staff';
+        if(!req.session.user || (req.session.user && req.session.user.userType == 'admin')) {//未登录者or管理员
+            //决定registerType的值（registerType的值用来决定ejs显示哪些控件）
+            if(!req.session.user || (req.session.user && req.query.registerType != 'admin')) {//未登录者只能注册staff，管理员若没有请求注册admin类型则也为staff
+                req.query.registerType = 'staff';
             }
             res.render('register', {
                 title: '注册',
-                user: req.session.user,
-                success: req.flash('success').toString(),
-                error: req.flash('error').toString(),
-                currenturl: req.url,
-                registertype: registertype
+                registerType: req.query.registerType
             });
         }
         else {//员工
@@ -47,10 +47,12 @@ module.exports = function(app){
     });
 
     app.post('/register', function(req, res){
-        if(!req.session.user || (req.session.user && req.session.user.usertype == 'admin')) {//未登录者or管理员
-            //检查用户有权限把usertype给admin，否则就给staff
-            if(!req.session.user || (req.session.user && req.body.usertype != 'admin')) {//未登录者只能注册staff，管理员若请求注册非admin类型则为staff
-                req.body.usertype = 'staff';
+        if(!req.session.user || (req.session.user && req.session.user.userType == 'admin')) {//未登录者or管理员
+            //检查用户有权限把userType给admin，否则就给staff
+            console.log(req.session.user.userType);
+            console.log(req.body.userType);
+            if(!req.session.user || (req.session.user && req.body.userType != 'admin')) {//未登录者只能注册staff，管理员若请求注册非admin类型则为staff
+                req.body.userType = 'staff';
             }
             var password = req.body.password;
             var password_re = req.body['password-repeat'];
@@ -65,10 +67,10 @@ module.exports = function(app){
             var newUser = new User({
                 username: req.body.username,
                 password: password,
-                usertype: req.body.usertype,
-                vehiclename: req.body.vehiclename,
-                staffname: req.body.staffname,
-                phonenumber: req.body.phonenumber
+                userType: req.body.userType,
+                vehicleName: req.body.vehicleName,
+                staffName: req.body.staffName,
+                phoneNumber: req.body.phoneNumber
             });
             //检查用户名是否已经存在
             User.get(newUser.username, function (err, user) {
@@ -83,10 +85,15 @@ module.exports = function(app){
                         req.flash('error', err);
                         return res.redirect('/reg');
                     }
-                    if(!req.session.user)
-                        req.session.user = newUser;//用户信息存入 session
                     req.flash('success', '注册成功！');
-                    return res.redirect('/');//注册成功后返回主页
+                    if(!req.session.user)
+                    {
+                        req.session.user = newUser;//用户信息存入 session
+                        return res.redirect('/');//注册成功后返回主页
+                    }
+                    else {
+                        return res.redirect('/users');//注册成功后返回用户列表
+                    }
                 });
             });
         }
@@ -99,11 +106,7 @@ module.exports = function(app){
     app.get('/login', checkNotLogin);
     app.get('/login', function(req, res){
         res.render('login', {
-            title: '登陆',
-            user: req.session.user,
-            success: req.flash('success').toString(),
-            error: req.flash('error').toString(),
-            currenturl: req.url
+            title: '登陆'
         })
     });
     app.post('/login', checkNotLogin);
@@ -124,7 +127,7 @@ module.exports = function(app){
             }
             //用户名密码都匹配后，将用户信息存入 session
             req.session.user = user;
-            req.flash('success', '登陆成功! 用户类型：'+user.usertype);
+            req.flash('success', '登陆成功! 用户类型：'+user.userType);
             return res.redirect('/');
         });
     });
@@ -138,7 +141,7 @@ module.exports = function(app){
 
     app.get('/users', checkLogin);
     app.get('/users', function(req, res){
-        if(req.session.user.usertype == 'admin') {//如果是管理员，显示员工列表
+        if(req.session.user.userType == 'admin') {//如果是管理员，显示员工列表
             //查询所有用户
             User.getList('admin', function (err, admins) {
                 if (!admins) {
@@ -152,10 +155,6 @@ module.exports = function(app){
                     }
                     res.render('userlist', {
                         title: '员工列表',
-                        user : req.session.user,
-                        success : req.flash('success').toString(),
-                        error : req.flash('error').toString(),
-                        currenturl: req.url,
                         admins: admins,
                         staffs: staffs
                     });
@@ -170,19 +169,15 @@ module.exports = function(app){
 
     app.get('/users/:username', checkLogin);//显示员工信息（如果是本人，还可以修改密码、修改信息）
     app.get('/users/:username', function (req, res) {
-        if(req.session.user.username == req.params.username || req.session.user.usertype == 'admin') {
-            User.get(req.params.username, function (err, presentuser) {
-                if (!presentuser) {
+        if(req.session.user.username == req.params.username || req.session.user.userType == 'admin') {
+            User.get(req.params.username, function (err, viewingUser) {
+                if (!viewingUser) {
                     req.flash('error', '用户不存在!');
                     return res.redirect('/users');//用户不存在则跳转到账号管理页
                 }
                 res.render('userinfo', {
                     title: req.params.username,
-                    user : req.session.user,
-                    success : req.flash('success').toString(),
-                    error : req.flash('error').toString(),
-                    currenturl: req.url,
-                    presentuser: presentuser
+                    viewingUser: viewingUser
                 });
             });
         }
@@ -192,11 +187,7 @@ module.exports = function(app){
 
     app.use(function (req, res) {
         res.render("404", {
-            title: '没有找到该页面',
-            user: req.session.user,
-            success: req.flash('success').toString(),
-            error: req.flash('error').toString(),
-            currenturl: req.url
+            title: '没有找到该页面'
         });
     });
 

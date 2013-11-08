@@ -1,5 +1,5 @@
 module.exports = {
     cookieSecret: 'carxus',
-    dbname: 'vehicle_monitor',
+    dbName: 'vehicle_monitor',
     host: 'localhost'
 }
