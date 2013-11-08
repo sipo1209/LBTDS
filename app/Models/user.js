@@ -3,6 +3,10 @@ var mongodb = require('./db');
 function User(user) {
     this.username = user.username;
     this.password = user.password;
+    this.usertype = user.usertype;
+    this.vehiclename = user.vehiclename,
+    this.staffname = user.staffname,
+    this.phonenumber = user.phonenumber
 };
 
 module.exports = User;
@@ -10,10 +14,24 @@ module.exports = User;
 //存储用户信息
 User.prototype.save = function(callback) {
     //要存入数据库的用户文档
-    var user = {
-        username: this.username,
-        password: this.password
-    };
+    if(this.usertype == 'admin') {
+        var user = {
+            username: this.username,
+            password: this.password,
+            usertype: this.usertype
+        };
+    }
+    else {
+        var user = {
+            username: this.username,
+            password: this.password,
+            usertype: this.usertype,
+            vehiclename: this.vehiclename,
+            staffname: this.staffname,
+            phonenumber: this.phonenumber
+        };
+    }
+
     //打开数据库
     mongodb.open(function (err, db) {
         if (err) {
@@ -54,6 +72,34 @@ User.get = function(username, callback) {
                 mongodb.close();//关闭数据库
                 if (user) {
                     return callback(null, user);//成功！返回查询的用户信息
+                }
+                callback(err);//失败！返回 err 信息
+            });
+        });
+    });
+};
+
+User.getList = function(usertype, callback) {
+    //打开数据库
+    mongodb.open(function (err, db) {
+        if (err) {
+            return callback(err);//错误，返回 err 信息
+        }
+        //读取 users 集合
+        db.collection('users', function (err, collection) {
+            if (err) {
+                mongodb.close();//关闭数据库
+                return callback(err);//错误，返回 err 信息
+            }
+            var query = {};
+            if (usertype) {
+                query.usertype = usertype;
+            }
+            //查找用户名（username键）值为 username 一个文档
+            collection.find(query).toArray(function(err, users){
+                mongodb.close();//关闭数据库
+                if (users) {
+                    return callback(null, users);//成功！返回查询的用户信息
                 }
                 callback(err);//失败！返回 err 信息
             });
