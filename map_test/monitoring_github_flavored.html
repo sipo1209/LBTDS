@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>车辆监控平台</title>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link rel='stylesheet' href='stylesheets/bootstrap.css' />
+    <link rel="stylesheet" href="stylesheets/bootstrap-responsive.css">
+    <link rel="stylesheet" href="stylesheets/livemap.css">
+<link rel="stylesheet" href="stylesheets/1.css">
+
+
+
+<!--
+<link href="https://github.global.ssl.fastly.net/assets/github2-b95518dadd9fd57d8fb892270da34baed14530c4.css" media="all" rel="stylesheet" type="text/css" />
+<!--这个文件的内容提取出来放在2.css里了，但是.repo-filter:hover 不起作用了！！-->
+-->
+<link rel="stylesheet" href="stylesheets/2.css">
+
+
+</head>
+<body>
+
+    <div class="navbar navbar-fixed-top" id="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/">车辆监控平台</a>
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="/livemap">实况地图</a></li>
+                        <li ><a href="/account">账号管理</a></li>
+                        <li><a href="/logout">注销</a></li>
+                        <li><a href="/login">登陆</a></li>
+                        <li ><a href="/reg">注册</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="container" class="container">
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="media-body">
+                    <div id="mapbox" style="width:770px;height:450px;border:#ccc solid 1px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="span4">
+                <div class="box box-small repos user-repos js-repo-filter" id="your_repos">
+                    <div class="box-header">
+                        <a href="/repositories/new" class="minibutton primary new-repo">
+                            <span class="octicon octicon-repo-create"></span>操作</a>
+                        <h3 class="box-title">
+                            车辆<span class="box-title-count">(10)</span>
+                        </h3>
+                    </div>
+
+                    <div class="box-body">
+                        <div class="filter-repos filter-bar">
+                            <input type="text" id="your-repos-filter" class="filter-input js-filterable-field" placeholder="查询车辆&hellip;" tabindex="2">
+                            <ul class="repo-filterer">
+                                <li><a href="#" class="repo-filter js-repo-filter-tab filter-selected" data-filter=".public, li.private">全部</a><li>
+                                <li><a href="#" class="repo-filter js-repo-filter-tab" data-filter=".public">洪山</a></li>
+                                <li><a href="#" class="repo-filter js-repo-filter-tab" data-filter=".private">江夏</a></li>
+                                <li><a href="#" class="repo-filter js-repo-filter-tab" data-filter=".source">刘芳</a></li>
+                                <li><a href="#" class="repo-filter js-repo-filter-tab" data-filter=".fork">
+                                    武昌</a></li>
+                            </ul>
+                        </div>
+                        <hr />
+
+
+
+                        <ul id="repo_listing" class="repo-list js-repo-list" data-filterable-for="your-repos-filter" data-filterable-type="substring">
+
+                            <li class="public source ">
+                              <a href="/Peer5/ShareFest" class="repo-list-item css-truncate">
+                                    <span class="owner css-truncate-target" title="Peer5">鄂A0001</span>/<span class="repo" title="ShareFest">张三</span>
+                                    </span>
+                                    <span class="stars">
+                                        驶向任务...
+                                    </span>
+                                    <span class="repo-description css-truncate-target">一些车辆的详细信息
+                                    </span>
+                              </a>
+                            </li>
+
+                            <li class="public source ">
+                              <a href="/Peer5/ShareFest" class="repo-list-item css-truncate">
+                                    <span class="owner css-truncate-target" title="Peer5">鄂A0001</span>/<span class="repo" title="ShareFest">张三</span>
+                                    </span>
+                                    <span class="stars">
+                                        驶向任务...
+                                    </span>
+                                    <span class="repo-description css-truncate-target">一些车辆的详细信息
+                                    </span>
+                              </a>
+                            </li>
+
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DD1580bc446609f4dcfb2d20728b681a"></script>-->
+            <script type="text/javascript" src="javascripts/livemap.js"></script>
+
+            <hr />
+            <footer>
+                <p><a href="http://www.baidu.com/" target="_blank">课程帝国</a> 2013</p>
+            </footer>
+        </div>
+    </div>
+</body>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+</html>
