@@ -68,35 +68,18 @@
     border-color: rgb(213, 213, 213);
     border-style: solid;
     border-width: 1px;
-
-
     line-height: 18px;
 }
 
-.sidebox-filter{
-    background-color: #fafafa;
-    padding-top: 12px;
-    height: 62px;
-    text-decoration:none;
-}
-
-.sidebox-search {
-    border-radius: 12px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    font-size: 12px;
-    height: 26px;
-    line-height: 16px;
-    padding-left: 12px;
-    margin-left:30px;
-}
 
 .sidebox-region {
+    clear:both;
+    display: block;
     list-style: none;
-    margin-left:12px;
 }
 
 .region-tab{
+    display: block;
     color: rgb(119, 119, 119);
     float: left;
     font-size: 12px;
@@ -160,3 +143,38 @@
 }
 
 
+.sidebox-filter{
+    background-color: #fafafa;
+
+    padding-top: 12px;
+    padding-bottom: 18px;
+    text-decoration:none;
+}
+
+.sidebox-search {
+    display:block;
+    border-radius: 12px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    font-size: 12px;
+    height: 26px;
+    line-height: 16px;
+    padding-left: 12px;
+    margin:0 auto;
+}
+
+.autocomplete{
+    border: 1px solid #9ACCFB;
+    background-color: white;
+    text-align: left;
+}
+.autocomplete li{
+    list-style-type: none;
+}
+.clickable {
+    cursor: default;
+    float:left;
+}
+.highlight {
+    background-color: #9ACCFB;
+}

@@ -1,5 +1,7 @@
 <%- include header %>
-    <link rel="stylesheet" href="stylesheets<%= locals.url + '.css'%>">
+    <link rel="stylesheet" href="stylesheets<%= url + '.css'%>">
+
+
     <div class="row-fluid">
         <div class="span9">
             <div id="map_canvas">
@@ -17,18 +19,20 @@
 
                 <div class="sidebox-body">
                     <div class="sidebox-filter">
-                        <input class="sidebox-search" type="text" placeholder="按车牌号查询...">
+                        <input class="sidebox-search" id="search-text" type="text" placeholder="按车牌号查询...">
                         <ul class="sidebox-region">
-                            <li><a href="" class="region-tab">全部</a><li>
-                            <li><a href="" class="region-tab">武昌</a><li>
-                            <li><a href="" class="region-tab">洪山</a><li>
-                            <li><a href="" class="region-tab">江夏</a><li>
-                            <li><a href="" class="region-tab">刘芳</a><li>
+                            <li><a href="" class="region-tab">全部</a></li>
+                            <li><a href="" class="region-tab">武昌</a></li>
+                            <li><a href="" class="region-tab">洪山</a></li>
+
+
+                            <li><a href="" class="region-tab">江夏</a></li>
+                            <li><a href="" class="region-tab">刘芳</a></li>
                         </ul>
                     </div>
 
 
-                    <ul class="sidebox-list">
+                    <ul class="sidebox-list" id="list">
                         <% staffs.forEach(function (staff, index) { %>
                             <li class="item">
                                 <a href="">
@@ -45,14 +49,7 @@
         </div>
     </div>
 
-
-    <script type="text/javascript" src="javascripts/baidumap.js"></script>
-    <script type="text/javascript" src="javascripts/monitoring.js"></script>
-
-    <!--上面的本地文档是来自这个地址的。远程获取js脚本，太慢了。
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DD1580bc446609f4dcfb2d20728b681a"></script>
-    <script type="text/javascript" src="javascripts/monitoring.js"
-            ></script>
-    -->
+<script type="text/javascript" src="javascripts/baidumap.js"></script>
+<script type="text/javascript" src="javascripts/monitor.js"></script>
 
 <%- include footer %>

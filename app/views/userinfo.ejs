@@ -1,9 +1,9 @@
 <%- include header %>
 
 <legend>操作面板</legend>
-<% if(viewingUser.username == locals.user.username | locals.user.userType == 'admin' ) { %>
-    <a class="btn" href="<%= locals.user.username %>/editpw">修改密码</a>
-    <a class="btn" href="<%= locals.user.username %>/editinfo">编辑信息</a>
+<% if(viewingUser.username == user.username | user.userType == 'admin' ) { %>
+    <a class="btn" href="<%= user.username %>/editpw">修改密码</a>
+    <a class="btn" href="<%= user.username %>/editinfo">编辑信息</a>
 <% } %>
 
 <hr />

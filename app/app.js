@@ -38,7 +38,6 @@ if ('development' == app.get('env')) {
 
 //dynamic helper
 app.use(function(req, res, next){
-    console.log('执行了');
     res.locals = {
         success: req.flash('success').toString(),
         error: req.flash('error').toString(),
@@ -50,7 +49,28 @@ app.use(function(req, res, next){
 
 //router
 app.use(app.router);
-routes(app);
+
+
+app.get('/',routes.index);
+app.get('/login',routes.verifyNotLogin,routes.login);
+app.post('/login',routes.verifyNotLogin,routes.loginPost);
+app.get('/register',routes.verifyNotLogin,routes.register);
+app.post('/register',routes.verifyNotLogin,routes.registerPost);
+
+app.get('/logout',routes.verifyLogin,routes.logout);
+app.get('/monitor',routes.verifyLogin,routes.monitor);
+app.get('/users',routes.verifyLogin,routes.users);
+app.get('/users/:username',routes.verifyLogin,routes.user);
+
+app.post('/json',routes.verifyLogin,routes.json);
+
+
+
+app.use(function (req, res) {
+    res.render("404", {
+        title: '没有找到该页面'
+    });
+});
 
 if (!module.parent){
     app.listen(app.get('port'), function(){
