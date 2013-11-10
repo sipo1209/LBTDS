@@ -1,6 +1,7 @@
 var Util = {
     setMapHeight: function() {
-        var mainBoxHeight = $(window).height()  - $('#navbar').height() - 140;
+//        var mainBoxHeight = $(window).height()  - $('#navbar').height() - 140;
+        mainBoxHeight = 700;
         $('#map_canvas').css({height: mainBoxHeight + 'px'});
     }
 }
@@ -29,8 +30,7 @@ $(document).ready(function(){
             console.log(staffs);
             if(staffs.length) {
                 $.each(staffs, function(index,term) {
-//                    $('<li></li>').text(term).appendTo($autocomplete)
-//                        .addClass('clickable');
+
                 })
             }
         }
@@ -80,14 +80,14 @@ $(function(){
 //创建自动完成的下拉列表，用于显示服务器返回的数据,插入在搜索按钮的后面，等显示的时候再调整位置
     var $autocomplete = $('<div class="autocomplete"></div>')
         .hide()
-        .insertAfter('#search-text');
+        .insertAfter($searchInput);
 //清空下拉列表的内容并且隐藏下拉列表区
     var clear = function(){
         $autocomplete.empty().hide();
     };
 //注册事件，当输入框失去焦点的时候清空下拉列表并隐藏
     $searchInput.blur(function(){
-//        setTimeout(clear,500);
+        setTimeout(clear,500);
     });
 //下拉列表中高亮的项目的索引，当显示下拉列表项的时候，移动鼠标或者键盘的上下键就会移动高亮的项目，想百度搜索那样
     var selectedItem = null;
@@ -142,10 +142,10 @@ $(function(){
                             });
                     });//事件注册完毕
 //设置下拉列表的位置，然后显示下拉列表
-                    var ypos = $searchInput.position().top;
-                    var xpos = $searchInput.position().left;
-//                    $autocomplete.css('width',$searchInput.css('width'));
-//                    $autocomplete.css({'position':'relative','left':xpos + "px",'top':ypos +"px"});
+                    var ypos = $searchInput.position().top + $searchInput.outerHeight();
+                    var xpos = $searchInput.position().left + parseInt($searchInput.css('margin-left'));
+                    $autocomplete.css('width',$searchInput.css('width'));
+                    $autocomplete.css({'position':'absolutive','left':xpos + "px",'top':ypos +"px"});
                     setSelectedItem(0);
 //显示下拉列表
                     $autocomplete.show();
@@ -209,9 +209,10 @@ $(function(){
         });
 //注册窗口大小改变的事件，重新调整下拉列表的位置
     $(window).resize(function() {
-        var ypos = $searchInput.position().top;
-        var xpos = $searchInput.position().left;
+        var ypos = $searchInput.position().top + $searchInput.outerHeight();
+        var xpos = $searchInput.position().left + parseInt($searchInput.css('margin-left'));
         $autocomplete.css('width',$searchInput.css('width'));
-        $autocomplete.css({'position':'relative','left':xpos + "px",'top':ypos +"px"});
+        $autocomplete.css({'position':'absolutive','left':xpos + "px",'top':ypos +"px"});
     });
 });
+
