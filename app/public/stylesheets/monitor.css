@@ -173,7 +173,6 @@
 }
 .clickable {
     cursor: default;
-    float:left;
 }
 .highlight {
     background-color: #9ACCFB;

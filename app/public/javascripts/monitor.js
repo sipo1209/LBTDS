@@ -74,7 +74,6 @@ $(function(){
 //取得div层
 //    var $search = $('#search');
 //取得输入框JQuery对象
-//    var $searchInput = $search.find('#search-text');
     var $searchInput = $('#search-text')
 //关闭浏览器提供给输入框的自动完成
     $searchInput.attr('autocomplete','off');
@@ -88,7 +87,7 @@ $(function(){
     };
 //注册事件，当输入框失去焦点的时候清空下拉列表并隐藏
     $searchInput.blur(function(){
-        setTimeout(clear,500);
+//        setTimeout(clear,500);
     });
 //下拉列表中高亮的项目的索引，当显示下拉列表项的时候，移动鼠标或者键盘的上下键就会移动高亮的项目，想百度搜索那样
     var selectedItem = null;
